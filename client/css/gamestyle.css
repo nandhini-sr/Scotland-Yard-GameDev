@@ -1,0 +1,332 @@
+body {
+	background-image: url("../img/finalBg.PNG");
+  	background-size: cover;
+  	background-repeat:  no-repeat;
+  	background-attachment: fixed;
+  	background-position: 50% 50%;
+}
+
+header{
+	z-index: 5;
+}
+
+section{
+	z-index: 5;
+}
+
+canvas
+{
+	z-index: -1;
+		
+}
+
+#canvas4
+{
+	background-image:url("../img/scotlandYard.PNG") !important;
+	background-size: contain;
+  	background-repeat:  no-repeat;
+  	display: inline;
+	
+}
+
+ul
+{
+	list-style-type: none; 
+	margin-left: 35%;
+}
+ul li
+{
+	display: inline;
+}
+ul li a{
+  font-size: 200%;
+  text-decoration: none;
+  color:white;
+  font-family: pristina;
+}
+
+ul li a:hover{
+  color:#ffc107;
+  cursor:pointer;
+  text-decoration:underline;
+  font-size: 250%;
+}
+#anchorRule
+{
+	color:white;
+}
+#anchorRule:hover
+{
+  color:#ffc107;
+  cursor:pointer;
+  text-decoration:underline;
+  font-size: 250%;
+}
+header hr
+{
+	border: 1px solid white;
+}
+
+.form-control
+{
+	background:rgba(256,256,256,0.4) !important;
+	margin-top:10px;
+	width: 50% !important;
+	height:35px;
+	color:black !important;
+	margin-left: 140px;
+}
+
+p
+{
+	margin-left: 140px;
+	color:yellow;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#btnTaxi
+{
+	margin-left: 0px;
+	font-family: Arial;
+	font-weight:bold;
+	background-color:#ffc107;
+	color:black;
+	border-width: 0;
+	display:inline;
+}
+
+#btnBus
+{
+	margin-left: 0px;
+	font-family: Arial;
+	font-weight:bold;
+	background-color:#28a745;
+	color:white;
+	border-width: 0;
+	display:inline;
+}
+
+#btnUG
+{
+	margin-left: 0px;
+	font-family: Arial;
+	font-weight:bold;
+	background-color:#dc3545;
+	color:white;
+	border-width: 0;
+	display:inline;
+}
+
+#btnBlack
+{
+	margin-left: 0px;
+	font-family: Arial;
+	font-weight:bold;
+	background-color:black;
+	color:white;
+	border-width: 0;
+	display:inline;
+}
+
+#numTaxi
+{
+	margin-left: 0px;
+	color:#ffc107;
+	font-weight: bold;
+	font-style: normal;
+	display:inline;
+	font-size:130%;
+	
+}
+
+#numBus
+{
+	margin-left: 0px;
+	color:#28a745;
+	font-weight: bold;
+	font-style: normal;
+	display:inline;
+	font-size:130%;
+	
+}
+
+#numUg
+{
+	margin-left: 0px;
+	color:#dc3545;
+	font-weight: bold;
+	font-style: normal;
+	display:inline;
+	font-size:130%;
+	
+}
+
+#numBlack
+{
+	margin-left: 0px;
+	color:black;
+	font-weight: bold;
+	font-style: normal;
+	display:inline;
+	font-size:130%;
+}
+
+::placeholder {
+  color:black !important;
+}
+
+.col-md-6
+{
+	background: transparent;
+	box-shadow: -1px 1px 50px 10px black;
+	border-radius: 10px 0px 20px 10px;
+}
+
+.btn-warning
+{
+	margin-left: 230px;
+	font-family: pristina;
+}
+
+.btn-info
+{
+	margin-left: 250px;
+	font-family: pristina;
+}
+
+.btn-success
+{
+	margin-left: 250px;
+	font-family: pristina;
+}
+
+h2
+{
+	font-family: pristina;
+}
+
+h5
+{
+	font-family: pristina;
+}
+
+#centerGamePage
+{
+	background-image:none !important;
+	background-color: #9e9e9e !important;
+}
+#board
+{
+	display: inline;
+	margin-left:200px;
+	margin-top:80px;
+	width:700px;
+	height:600px;
+}
+.game-wrapper {
+  background-color: rgb(255, 255, 255);
+  width: 400px;
+  height: 680px;
+  max-height: 680px;
+  margin-top: 15px;
+  margin-right: 40px;
+  float:right;
+  display: inline-flex;
+  flex-direction: column;
+  border: 1px solid lightgrey;
+}
+
+#events {
+  flex-grow: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid lightgrey;
+  overflow-y: scroll;
+}
+
+#pathTrack
+{
+  flex-grow: 1;
+  list-style: none;
+  margin-left: 20px;
+  padding: 10px 20px 10px 10px;
+  border-bottom: 1px solid lightgrey;
+  overflow-y: scroll;
+}
+
+#events {
+  padding: 10px 20px 10px 10px;
+}
+
+.chat-wrapper {
+  padding: 10px;
+}
+
+.chat-wrapper form {
+  display: flex;
+}
+
+.chat-wrapper form input {
+  font-size: 1.0rem;
+  margin: 0 10px 0 0;
+  padding: 0 5px;
+  flex-grow: 1;
+}
+
+.chat-wrapper form button {
+  width: 80px;
+  text-transform: uppercase;
+  padding: 3px 15px;
+  color: white;
+  background-color: #00bcd4;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
+  
+}
+
+#headChat
+{
+	background-color: #00bcd4;
+  	border: none;
+  	border-radius: 2px;
+   	box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
+   	color:white;
+    font-family: pristina;
+    padding:10px;
+    text-align: center;
+}
+
+#tell
+{
+	color: black;
+    display: block;
+    font-family: pristina;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+#teamDesp li
+{
+	margin-left: -70px;
+	display:inline;
+}
+
+#songPlay
+{
+	font-size:25px;
+	color:#ffc107;
+	display:inline;
+	cursor:pointer;
+}
+
+#songPause
+{
+	font-size:25px;
+	color:#ffc107;
+	display:inline;
+	cursor:pointer;
+}

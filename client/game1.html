@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Scotland Yard</title>
+	<link rel="stylesheet" type="text/css" href="css/gamestyle.css">	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<link rel="stylesheet" href="  https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<audio id="song" autoplay loop>
+    <source src="sound/song.mp3" type="audio/mpeg">
+	</audio>
+	<div id="frontPage">
+	<header>
+	<br>
+	<a href="#"><img src="img/logo.jpg" style="margin-left: 20px"></a>
+	<div style="float:right; margin-right: 15px; margin-top: 10px;color:#ffc107;font-weight: bold; font-size: 120%">
+	Audio:&nbsp&nbsp<i id="songPlay" class="fa fa-play" onclick="playSong()"></i>&nbsp&nbsp
+	<i id="songPause" class="fa fa-pause" onclick="pauseSong()"></i></div>
+	<hr>
+	<ul><b>
+		<li><a href="#">Home</a></li>&nbsp&nbsp&nbsp&nbsp&nbsp
+		<li><a href="https://drive.google.com/file/d/1Zs39kh7gEm0wdo7eegXLM_DZlvOgZyQv/view?usp=sharing">Rule_Book</a></li>&nbsp&nbsp&nbsp&nbsp&nbsp
+		<li><a id="anchorRule" data-toggle="modal" data-target="#gameRules">Game_Features</a></li>
+	</b></ul>
+	<hr>
+	</header>	
+	<section>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<canvas id="canvas3"></canvas>
+			</div>
+			<div class="col-md-6">
+				<br>
+				<h2 style="color:white" class="text-center">Be a Detective or Mr X !</h2>
+				<input type="text" id="un" class="form-control" placeholder="user_name">
+				<p id="userCheck"></p>
+				<p id="takenCheck"></p>
+				<input type="password" id="up" class="form-control" placeholder="user_password">
+				<input type="password" id="cup" class="form-control" placeholder="confirm_user_password">
+				<p id="passwordCheck"></p>
+				<br>
+				<button class="btn btn-success" onclick="createUser()">GET READY</button>
+				<p id="readySuccess" style="color:#28a745;margin-left: 190px;"></p>
+				<br>
+				<br>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<br>
+				<h2 style="color:white" class="text-center">Join a Team!</h2>
+				<input type="text" id="ct_tn" class="form-control" placeholder="team_name">
+				<p id="teamCheck"></p>
+				<p id="teamtakenCheck"></p>
+				<input type="password" id="ct_tp" class="form-control" placeholder="team_password">
+				<p id="teampasswordCheck"></p>
+				<input type="password" id="ct_ctp" class="form-control" placeholder="confirm_team_password">
+				<p><i>*! Share this password only with your teammates !*</i></p>
+				<input type="text" id="xun" class="form-control" placeholder="user_name of Mr X">
+				<input type="text" id="d1un" class="form-control" placeholder="user_name of detective 1">
+				<input type="text" id="d2un" class="form-control" placeholder="user_name of detective 2">
+				<input type="text" id="d3un" class="form-control" placeholder="user_name of detective 3">
+				<p id="commonMsg"></p>
+				<br>
+				<button class="btn btn-info" onclick="createTeam()">CREATE TEAM</button>
+				<p id="teamSuccess" style="color:#17a2b8;margin-left: 210px;"></p>
+				<br>
+				<br>
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<canvas id="canvas1"></canvas>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				<canvas id="canvas2"></canvas>
+			</div>
+			<div class="col-md-6">
+				<br>
+				<h2 style="color:white" class="text-center">Time to Play!</h2>
+				<input type="text" id="username" class="form-control" placeholder="user_name">
+				<p id="userexist"></p>
+				<input type="password" id="userpassword" class="form-control" placeholder="user_password">
+				<p id="upmatch"></p>
+				<input type="text" id="teamname" class="form-control" placeholder="team_name">
+				<p id="teamexist"></p>
+				<input type="password" id="teampassword" class="form-control" placeholder="team_password">
+				<p id="tpmatch"></p>
+				<p id="tuexist"></p>
+				<br>
+				<button class="btn btn-warning" onclick="enterGame()" class="text-center">LETS  PLAY</button>
+				<p id="enterSuccess" style="color:#ffc107;margin-left: 250px;"></p>
+				<br>
+				<br>
+			</div>
+		</div>
+
+		<!-- Modal for rules-->
+			<div class="modal fade" id="gameRules" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-scrollable" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="Title">Game Features</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body"style="font-size: 120%">
+			      	<div>
+			        <h2><b><u>The Scene:</u></b></h2>
+			        <p style="color:black;margin-left: 0px;font-family: pristina;">Mr. X, a most-wanted criminal, is on the run in a quadrant of Central London and Scotland Yard’s finest detectives are in hot pursuit to capture him within 15 moves. To escape capture, Mr. X must move cleverly and secretly by revealing himself after 3rd,7th,11th and 15th move and to corner and capture Mr. X, the detectives must use ingenuity, honesty and cooperation.</p>
+			        <br>
+			        <h2><b><u>The Challenge:</u></b></h2>
+			        <p style="color:black;margin-left:0px;font-family: pristina;">If you’re Mr. X you must avoid capture long enough for the detectives to run out of their travel tickets.If you’re the detectives, one of you must capture Mr. X by landing on the same space Mr. X occupies.</p>
+			        <br>
+			        <h2><b><u>Set Up:</u></b></h2>
+			        <p style="color:black;margin-left:0px;font-family: pristina;">Form a team of 3 detectives and 1 fugitive-Mr X.<br>
+					A detective’s ticket supply is limited and gets exactly 15 tickets for 15 moves which includes 8-taxi, 5-bus, 2-underground tickets. Once a ride is taken and a fare is paid, that ticket is spent and can’t be replenished again. So, spend your tickets wisely with care. <br>
+					Mr X begins with 7 tickets which includes 3-taxi, 2-bus, 2-underground and 2 SPECIAL black ticket (only for Mr X to travel across River Thames - #157,#115,#118). During the game Mr X’s supply increases, for as detectives spend tickets they hand them over to Mr X. Hence Mr X has unlimited ticket supply to ride in any transportation he wishes.
+					</p>
+					<br>
+					<h2><b><u>The Start:</u></b></h2>
+					<p style="color:black;margin-left:0px;font-family: pristina;">A randomly generated location from a selected set of stations in the quadrant of Central London is displayed to each player on screen. Each player must place their pawn using WASD keyboard keys to respective positions. Note that Mr X’s location is kept as a secret. So, the uncolored pawn doesnot take any position on board and Mr X must move it out of the canvas screen. Now the game begins, with Mr X playing first.</p><br>
+					<h2><b><u>The Play:</u></b></h2>
+					<ul style="color:black;margin-left:0px;font-family: pristina;font-weight:bold">
+						<li>1. You can move on the colored route and to the next numbered location on the route that matches the ticket you paid. Take a look at #128, from this spot, you could take an underground journey by broken red line to #140 and #185, or a bus ride by solid green line to #161, #135, #142, #187, #199, or ride on a taxi through solid yellow line to #143, #142, #160, #172, #188.</li><br><br>
+						<li>2. On your turn, you must pay your fare to Mr X by entering your ride details into database and move your pawn throught he destined path for other players to know your location though your paths will be tracked on screen as well. Note, no players can refuse to move and remain in same location.</li><br><br>
+						<li>3. You can never move to an already occupied numbered location. There never can be two or more pawns on the same spot – and of course, if Mr. X moved onto an occupied location or a detective moved onto a location occupied by Mr. X, the game would be over!</li><br><br>
+						<li>3. Chatting through web to map out strategies is highly encouraged. Talk over the best move for each of you before any of your pawns are transported. Cooperation will help tighten the dragnet!</li><br><br>
+						<li> 4. As a detective, your tickets are limited and diminishes as you play and it is possible that you could be stranded at a location without the particular fare you need to move from and to another location. If this happens your pawn is out of the game but remains on the gameboard…. on its stranded location!</li><br><br>
+						<li>5. As Mr X it is highly advised to show, hide and move your pawns in canvas with perfect planning and care to escape from the capture.</li><br><br>
+						</ul><br>
+						<h2><b><u>The End of the Game:</u></b></h2>
+						<p style="color:black;font-family: pristina;margin-left:0px">The Game is over if any of the following occur:</p>
+						<ul style="font-family: pristina;margin-left:0px;font-weight:bold">
+							<li>1. If any player’s socket gets disconnected by refreshing the page or closing the browser tab – no one wins!</li><br><br>
+							<li>2. If any detective moves onto a numbered location that Mr. X occupies. Mr X is captured! Scotland Yard Detective team is the winner!</li><br><br>
+							<li>3. After every detective has made 15 moves and have run out of all fare tickets. Mr X escapes and wins the game!</li><br><br>
+							<li>4. If all the detectives confirm that they can make no move because they run out of a particular kind of ticket. This is a remote situation but it is possible that all detectives could be left with only bus or underground tickets and are stranded on locations that do not use such tickets. In this case as well Mr. X escapes and wins the game!</li><br><br>
+						</ul>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			      	 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+	</section>
+	<br><br>
+	</div>
+	<div id="gamePage" style="display:none">
+		<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<div class="game-wrapper" style="width:300px;height:270px;max-height:270px;">
+				<h3 id="headChat" style="background-color:#dc3545;">Game Play</h3>
+		     	<ul id="teamDesp">
+		       	</ul>
+	    	</div>
+
+			<div class="game-wrapper" style="width:300px;height:400px;max-height:400px;">
+				<h3 id="headChat" style="background-color:#28a745;">Track all paths</h3>
+	     	<ul id="pathTrack">
+	     	<li id="ptx" style="display:none;"><b><u>MrX:</u></b></li>
+	     	<li id="trackx"></li><br>
+
+	     	<li style="color:#dc3545;display:none;" id="pt1"><b><u>Det1:</u></b></li>
+	     	<li id="track1" style="color:#dc3545"></li><br>
+
+	     	<li style="color:#00bcd4;display:none;" id="pt2"><b><u>Det2:</u></b></li>
+	     	<li id="track2" style="color:#00bcd4"></li><br>
+
+	     	<li style="color:#ffc107;display:none;" id="pt3"><b><u>Det3:</u></b></li>
+	     	<li id="track3" style="color:#ffc107"></li>
+	       	</ul>
+	    	</div>
+		</div>
+		<div class="col-md-5" id="centerGamePage">
+		<center>
+		<br>
+		<h4 id="tell" class="text-center"></h4>
+		<canvas id="canvas4" style="z-index: 10;"></canvas>
+		<button id="btnTaxi">TAXI</button>
+		<p id="numTaxi"></p>&nbsp&nbsp&nbsp&nbsp
+		<button id="btnBus">BUS</button>
+		<p id="numBus"></p>&nbsp&nbsp&nbsp&nbsp
+		<button id="btnUG">UNDERGROUND</button>
+		<p id="numUg"></p>&nbsp&nbsp&nbsp&nbsp
+		<button id="btnBlack">BLACK TICKET</button>
+		<p id="numBlack"></p>&nbsp&nbsp&nbsp&nbsp
+		
+		<br><br>		
+		<button type="button" class="btn btn-primary" data-toggle="mod" data-target="#scotlandYardPlay" style="font-size: 120%;" id="playBtnTurn" onclick="checkOver()">Play On Your Turn!
+			</button>
+			<br>
+			<br>
+		</center>
+
+		<!-- Modal -->
+			<div class="modal fade" id="scotlandYardPlay" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="Title">Enter your Move</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body text-center">
+			        Boarding Spot: <input type="number" id="from" size="5px"><br>
+			        <p id="fromCheck" style="color:black"></p><br>
+			        Ride to: <input type="number" id="to" size="5"><br>
+			        <p id="toCheck" style="color:black"></p><br>
+			        Mode of Transport: <select id="using">
+					  <option value="taxi">Taxi</option>
+					  <option value="bus">Bus</option>
+					  <option value="underground">Underground</option>
+					  <option value="blackTicket">Black Ticket</option>
+					</select>
+					<p id="modeCheck" style="color:black"></p>
+					<p id="noMovesCheck" style="color:black;display:none;margin-left: 0px">Are you sure, no moves are possible? Check again please!</p>
+					<center>
+			      	<button id="noMovesCheckBtn" type="button" class="btn-basic" onclick ="confirmNoMoves();" style="display:none;">Confirm no moves!</button>
+			      </center>
+			      </div>
+			      <div class="modal-footer">
+			      	<button id="taxiOver"type="button" class="btn btn-default" onclick ="noMoves()" style="display:none;">.</button>
+			        <button type="button" class="btn btn-primary" onclick = "turnOver()">Take a ride!</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>	
+
+			<!-- Modal for GameOver-->
+			<div class="modal fade" id="gameOverSLYG" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="Title">Game Over</h5>
+			      </div>
+			      <div class="modal-body text-center">
+			      	<center>
+			       		<h2 id="xWin" style="display:none">Mr X escaped!</h2>
+			       		<h2 id="dWin" style="display:none">Mr X captured!</h2>
+			       		<hr>
+			       		<h5 id="goTN">Team Name:</h5>
+			       		<h5 id="goX">Mr X :</h5>
+			       		<h5 id="goD1">Detective 1:</h5>
+			       		<h5 id="goD2">Detective 2:</h5>
+			       		<h5 id="goD3">Detective 3:</h5>
+			       		<h5 id="goSP">Statergy Planned:</h5>
+			       		<h5 id="goDW">Detectives Won:</h5>
+			       		<h5 id="goXW">Mr X Won:</h5>
+			       	</center>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" onclick = "window.location.reload();">New Game!</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<!-- Modal for disconnected-->
+			<div class="modal fade" id="gameDisconnect" tabindex="-1" role="dialog" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="Title">Game Over</h5>
+			      </div>
+			      <div class="modal-body text-center">
+			      	<h2>Player Disconnected! Game Ends!</h2>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" onclick = "window.location.reload();">New Game!</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>					
+		</div>
+		<div class="col-md-4">
+			<div style="float:right; margin-right: 45px; margin-top: 10px;color:#ffc107;font-weight: bold; font-size: 120%">
+			<div id="movement" style="display:inline">Moves: 0</div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	Audio:&nbsp&nbsp<i id="songPlay" class="fa fa-play" onclick="playSong()"></i>&nbsp&nbsp
+	<i id="songPause" class="fa fa-pause" onclick="pauseSong()"></i></div>
+			<div class="game-wrapper">
+				<h3 id="headChat">Strategy Mapping Zone</h3>
+	     	 <ul id="events">
+	       	</ul>
+	      	<div class="controls">
+	        <div class="chat-wrapper">
+	          <form id="chat-form">
+	            <input id="chat" autocomplete="off" title="chat">
+	            <button id="send">SEND</button>
+	          </form>
+	        </div>
+	    	</div>
+	    	</div>
+    	</div>
+    	</div>
+
+    	<br><br><br>
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	
+	<script>
+		var socket = io();
+		
+		function playSong()
+		{
+			var X = document.getElementById("song").play();
+		}
+
+		function pauseSong()
+		{
+			var X = document.getElementById("song").pause();
+		}
+
+		var canvas1 = document.getElementById('canvas1');
+		canvas1.height = 520;
+		canvas1.width = 420;
+		var c1 = canvas1.getContext('2d');
+
+		var canvas2 = document.getElementById('canvas2');
+		canvas2.height = 330;
+		canvas2.width = 420;
+		var c2 = canvas2.getContext('2d');
+
+		var canvas3 = document.getElementById('canvas3');
+		canvas3.height = 285;
+		canvas3.width = 420;
+		var c3 = canvas3.getContext('2d');
+
+		var canvas4 = document.getElementById('canvas4');
+		canvas4.height = 548;
+		canvas4.width = 605;
+		var c4 = canvas4.getContext('2d');
+
+		
+		class centerPawn
+		{
+			constructor(x,y)
+			{
+				this.x = x;
+				this.y = y;
+				this.n = 1;
+			}
+
+			draw()
+			{
+				this.n = this.n+1;
+			    
+			    c4.save();
+				c4.beginPath();
+				c4.fillStyle = 'rgba(256,256,256,0.8)';
+				c4.translate(this.x,this.y+6);
+			    c4.rotate(this.n*Math.PI/180);
+			    c4.translate(-this.x,-(this.y+6));
+				c4.moveTo(this.x,this.y);
+				c4.lineTo(this.x-12,this.y + 35);
+				c4.lineTo(this.x+12,this.y + 35);
+				c4.lineTo(this.x,this.y);
+				c4.fill();
+				c4.closePath();
+				c4.restore();
+
+				c4.save();
+				c4.beginPath();
+				c4.fillStyle = 'yellow';
+				c4.translate(this.x,this.y+6);
+			    c4.rotate(this.n*Math.PI/180);
+			    c4.translate(-this.x,-(this.y+6));
+			    c4.arc(this.x,this.y,8,0,Math.PI * 2,true);
+			    c4.fill();
+			    c4.closePath();
+			    c4.restore();
+
+			    c4.save();
+			    c4.beginPath();
+				c4.fillStyle = 'yellow';
+				c4.translate(this.x,this.y+6);
+			    c4.rotate(this.n*Math.PI/180);
+			    c4.translate(-this.x,-(this.y+6));
+				c4.fillRect(this.x-12, this.y+8, 24, 2);
+				c4.closePath();
+				c4.restore();
+								
+			}
+
+		}
+
+		function ini()
+		{
+			
+			center = new centerPawn(canvas4.width/2,canvas4.height/2);
+
+		}
+
+		var loopnumber = 1; //global variable
+		
+		function loop()
+		{
+			
+			if(loopnumber == 1)
+			{
+				c4.clearRect(0,0,canvas4.width,canvas4.height);
+				center.draw();
+	 			c4.font = "bold 20px pristina";
+	 			c4.fillStyle = "black";
+	 			c4.fillRect((canvas4.width/2)-170,(canvas4.height/2 + 100)-20,350,30);
+				c4.fillStyle = "yellow";
+				c4.textAlign = "center";
+				
+				c4.fillText('Waiting for all players to join the game....', (canvas4.width/2), (canvas4.height/2 + 100));
+				requestAnimationFrame(loop);
+			} 
+ 					 			
+			
+	 		
+		}
+
+	
+		class Pawn1
+		{
+			constructor(x,y,dx,dy,color)
+			{
+				this.x = x;
+				this.y = y;
+				this.dx = dx;
+				this.dy = dy;
+				this.color = color;
+			}
+
+			draw()
+			{
+				c1.beginPath();
+				c1.fillStyle = 'rgba(256,256,256,0.4)';
+				c1.moveTo(this.x,this.y);
+				c1.lineTo(this.x-12,this.y + 35);
+				c1.lineTo(this.x+12,this.y + 35);
+				c1.lineTo(this.x,this.y);
+				c1.fill();
+				c1.closePath();
+
+				c1.beginPath();
+				c1.fillStyle = this.color;
+			    c1.arc(this.x,this.y,8,0,Math.PI * 2,true);
+			    c1.fill();
+			    c1.closePath();
+
+			    c1.beginPath();
+				c1.fillStyle = this.color;
+				c1.fillRect(this.x-12, this.y+8, 24, 2);
+				c1.closePath();
+								
+			}
+
+			update()
+			{
+				if(this.y + 35> canvas1.height)
+				{
+					this.dy = -this.dy;
+				}
+
+				else if(this.y < 10)
+				{
+					this.dy = -this.dy;
+				}
+
+				if(this.x + 15 > canvas1.width)
+				{
+					this.dx = -this.dx;
+				}
+
+				else if(this.x<15)
+				{
+					this.dx = -this.dx;
+				}
+
+				this.x = this.x+ this.dx;
+				this.y = this.y+ this.dy;
+				this.draw();
+			}
+		}
+
+		class Pawn2
+		{
+			constructor(x,y,dx,dy,color)
+			{
+				this.x = x;
+				this.y = y;
+				this.dx = dx;
+				this.dy = dy;
+				this.color = color;
+			}
+
+			draw()
+			{
+				c2.beginPath();
+				c2.fillStyle = 'rgba(256,256,256,0.4)';
+				c2.moveTo(this.x,this.y);
+				c2.lineTo(this.x-12,this.y + 35);
+				c2.lineTo(this.x+12,this.y + 35);
+				c2.lineTo(this.x,this.y);
+				c2.fill();
+				c2.closePath();
+
+				c2.beginPath();
+				c2.fillStyle = this.color;
+			    c2.arc(this.x,this.y,8,0,Math.PI * 2,true);
+			    c2.fill();
+			    c2.closePath();
+
+			    c2.beginPath();
+				c2.fillStyle = this.color;
+				c2.fillRect(this.x-12, this.y+8, 24, 2);
+				c2.closePath();
+								
+			}
+
+			update()
+			{
+				if(this.y + 35 > canvas2.height)
+				{
+					this.dy = -this.dy;
+				}
+
+				else if(this.y < 10)
+				{
+					this.dy = -this.dy;
+				}
+
+				if(this.x + 15 > canvas2.width)
+				{
+					this.dx = -this.dx;
+				}
+
+				else if(this.x<15)
+				{
+					this.dx = -this.dx;
+				}
+
+				this.x = this.x+ this.dx;
+				this.y = this.y+ this.dy;
+				this.draw();
+			}
+		}
+
+		class Pawn3
+		{
+			constructor(x,y,dx,dy,color)
+			{
+				this.x = x;
+				this.y = y;
+				this.dx = dx;
+				this.dy = dy;
+				this.color = color;
+			}
+
+			draw()
+			{
+				c3.beginPath();
+				c3.fillStyle = 'rgba(256,256,256,0.4)';
+				c3.moveTo(this.x,this.y);
+				c3.lineTo(this.x-12,this.y + 35);
+				c3.lineTo(this.x+12,this.y + 35);
+				c3.lineTo(this.x,this.y);
+				c3.fill();
+				c3.closePath();
+
+				c3.beginPath();
+				c3.fillStyle = this.color;
+			    c3.arc(this.x,this.y,8,0,Math.PI * 2,true);
+			    c3.fill();
+			    c3.closePath();
+
+			    c3.beginPath();
+				c3.fillStyle = this.color;
+				c3.fillRect(this.x-12, this.y+8, 24, 2);
+				c3.closePath();
+								
+			}
+
+			update()
+			{
+				if(this.y + 35 > canvas3.height)
+				{
+					this.dy = -this.dy;
+				}
+
+				else if(this.y < 10)
+				{
+					this.dy = -this.dy;
+				}
+
+				if(this.x + 15 > canvas3.width)
+				{
+					this.dx = -this.dx;
+				}
+
+				else if(this.x<15)
+				{
+					this.dx = -this.dx;
+				}
+
+				this.x = this.x+ this.dx;
+				this.y = this.y+ this.dy;
+				this.draw();
+			}
+		}
+
+		
+
+
+		let pawn1s = [];
+		let pawn2s = [];
+		let pawn3s = [];
+		let colors = ['blue','green','red','#ffc107']; 
+		//red,green,red,yellow'#28a745'#dc3545
+
+		function randomIntFromRange(min,max){
+		return Math.floor(Math.random()*(max-min+1)+min);
+		}
+
+		function randomColor(colors){
+		return colors[Math.floor(Math.random()*colors.length)];
+		}
+
+		function initialise()
+		{
+			for(var i=0; i<4; i++)
+			{
+				if(i%2==0)
+				{
+					var dx = 0.5;
+					var dy = 0.5;
+
+				}
+				else
+				{
+					var dx = -0.5;
+					var dy = -0.5;
+				}
+				var x = randomIntFromRange(25,canvas1.width-35);
+				var y = randomIntFromRange(15,canvas1.height-50);
+				pawn1s.push(new Pawn1(x,y,dx,dy,colors[i]));
+
+				x = randomIntFromRange(25,canvas2.width-35);
+				y = randomIntFromRange(15,canvas2.height-50);
+				pawn2s.push(new Pawn2(x,y,-dx,-dy,colors[i]));
+
+				x = randomIntFromRange(25,canvas3.width-35);
+				y = randomIntFromRange(15,canvas3.height-50);
+				pawn3s.push(new Pawn3(x,y,-dx,-dy,colors[i]));
+
+			}
+
+		}
+		
+		function gameLoop()
+		{
+			c1.clearRect(0,0,canvas1.width,canvas1.height); 
+			c2.clearRect(0,0,canvas2.width,canvas2.height); 
+			c3.clearRect(0,0,canvas3.width,canvas3.height); 
+ 
+			pawn1s.forEach((pawn,index) => {
+	        pawn.update();
+	    	});
+
+			pawn2s.forEach((pawn,index) => {
+	        pawn.update();
+	    	});
+
+	    	pawn3s.forEach((pawn,index) => {
+	        pawn.update();
+	    	});
+
+	 		requestAnimationFrame(gameLoop);
+		}
+
+		initialise();
+		gameLoop();
+
+		var un = document.getElementById('un');
+		var up = document.getElementById('up');
+		var cup = document.getElementById('cup');
+		
+		var ct_tn = document.getElementById('ct_tn');
+		var ct_tp = document.getElementById('ct_tp');
+		var ct_ctp = document.getElementById('ct_ctp');
+		var xun = document.getElementById('xun');
+		var d1un = document.getElementById('d1un');
+		var d2un = document.getElementById('d2un');
+		var d3un = document.getElementById('d3un');
+
+		var username = document.getElementById('username');
+		var userpassword = document.getElementById('userpassword');
+		var teamname = document.getElementById('teamname');
+		var teampassword = document.getElementById('teampassword');
+
+		var from = document.getElementById('from');
+		var to = document.getElementById('to');
+		var using = document.getElementById('using');
+	
+
+		function createUser()
+		{
+			socket.emit('createUser',
+			{
+				user_name:un.value,
+				user_password:up.value,
+				confirm_up:cup.value
+
+			});
+
+			un.value = '';
+			up.value = '';
+			cup.value = '';
+
+		}
+		
+		function createTeam()
+		{
+			socket.emit('createTeam',
+			{
+				team_name:ct_tn.value,
+				team_password:ct_tp.value,
+				team_ctp:ct_ctp.value,
+				xun: xun.value,
+				d1un:d1un.value,
+				d2un:d2un.value,
+				d3un:d3un.value
+			});
+
+			ct_tn.value = '';
+			ct_tp.value = '';
+			ct_ctp.value = '';
+			xun.value = '';
+			d1un.value = '';
+			d2un.value = '';
+			d3un.value = '';
+		}
+
+		function enterGame()
+		{
+			socket.emit('enterGame',
+			{
+				username:username.value,
+				userpassword:userpassword.value,
+				teamname:teamname.value,
+				teampassword:teampassword.value
+				
+			});
+
+			username.value = '';
+			userpassword.value = '';
+			teamname.value = '';
+			teampassword.value = '';
+
+		}
+
+		function turnOver()
+		{
+			socket.emit('checkPath',
+			{
+				from:from.value,
+				to:to.value,
+				using:using.value,
+								
+			});
+
+			from.value = '';
+			to.value = '';
+			using.value = 'taxi';
+						
+		}
+
+		function checkOver()
+		{
+			socket.emit('checkOver');
+		}
+
+		function noMoves()
+		{
+			document.getElementById('noMovesCheck').style.display = "block";
+			document.getElementById('noMovesCheckBtn').style.display = "block";
+
+		}
+
+		function confirmNoMoves()
+		{
+			socket.emit('cantMove');
+		}
+
+		socket.on('pathResponse',function(data)
+		{
+			document.getElementById('fromCheck').style.display="none";
+			document.getElementById('toCheck').style.display="none";
+			document.getElementById('modeCheck').style.display="none";
+			//document.getElementById('pathSuccess').style.display="none";
+			var show = document.getElementById(data.id);
+			show.style.display = "block";
+			show.innerHTML = data.msg;
+			
+		});
+
+		socket.on('resetPathResponse',function(){
+			document.getElementById('fromCheck').style.display="none";
+			document.getElementById('toCheck').style.display="none";
+			document.getElementById('modeCheck').style.display="none";
+			//document.getElementById('pathSuccess').style.display="none";
+			document.getElementById('noMovesCheck').style.display="none";
+			document.getElementById('noMovesCheckBtn').style.display="none";
+		});
+
+		var numTaxi = document.getElementById('numTaxi');
+		var numBus = document.getElementById('numBus');
+		var numUg = document.getElementById('numUg');
+		var numBlack = document.getElementById('numBlack');
+
+		
+
+		socket.on('userResponse',function(data)
+		{
+			document.getElementById('userCheck').style.display="none";
+			document.getElementById('takenCheck').style.display="none";
+			document.getElementById('passwordCheck').style.display="none";
+			document.getElementById('readySuccess').style.display="none";
+			var show = document.getElementById(data.id);
+			show.style.display = "block";
+			show.innerHTML = data.msg;
+			
+		});
+
+		socket.on('teamResponse',function(data)
+		{
+			document.getElementById('teamCheck').style.display="none";
+			document.getElementById('teamtakenCheck').style.display="none";
+			document.getElementById('teampasswordCheck').style.display="none";
+			document.getElementById('teamSuccess').style.display="none";
+			document.getElementById('commonMsg').style.display="none";
+			var show = document.getElementById(data.id);
+			show.style.display = "block";
+			show.innerHTML = data.msg;
+			
+		});
+
+		socket.on('enterResponse',function(data)
+		{
+			document.getElementById('userexist').style.display="none";
+			document.getElementById('upmatch').style.display="none";
+			document.getElementById('teamexist').style.display="none";
+			document.getElementById('tpmatch').style.display="none";
+			document.getElementById('tuexist').style.display="none";
+			document.getElementById('enterSuccess').style.display="none";
+			var show = document.getElementById(data.id);
+			show.style.display = "block";
+			show.innerHTML = data.msg;
+			
+		});
+
+		socket.on('goToGame',function()
+		{
+			document.getElementById('frontPage').style.display="none";
+			document.getElementById('gamePage').style.display="block";	
+
+		});
+
+		socket.on('informPlayers',function(data)
+		{
+			ini();
+			loop();
+		});
+
+		socket.on('tellPlayers',function(data)
+		{
+			var show = document.getElementById('tell');
+			show.style.display = "block";
+			show.innerHTML = data.msg;
+		});
+
+
+
+		socket.on('drawPlayers',function(data){
+		c4.clearRect(0,0,canvas4.width,canvas4.height);
+				
+			for(var i=0; i<data.length; i++)
+			{
+				drawIt(data[i].x,data[i].y,data[i].colors);
+			}
+		
+		});
+
+		socket.on('newPosition',function(data){
+		c4.clearRect(0,0,canvas4.width,canvas4.height);
+		for(var i=0; i<data.length; i++)
+		{
+			for(var i=0; i<data.length; i++)
+			{
+				drawIt(data[i].x,data[i].y,data[i].colors);
+			}
+		}
+		
+		});
+
+		function drawIt(x,y,color)
+		{
+				c4.beginPath();
+				c4.fillStyle = 'rgba(256,256,256,0.8)';
+				c4.moveTo(x,y);
+				c4.lineTo(x-12,y + 35);
+				c4.lineTo(x+12,y + 35);
+				c4.lineTo(x,y);
+				c4.fill();
+				c4.closePath();
+
+				c4.beginPath();
+				c4.fillStyle = color;
+			    c4.arc(x,y,8,0,Math.PI * 2,true);
+			    c4.fill();
+			    c4.closePath();
+
+			    c4.beginPath();
+				c4.fillStyle = color;
+				c4.fillRect(x-12, y+8, 24, 2);
+				c4.closePath();
+		}
+
+
+		var chatText = document.getElementById('events');
+		var chatInput = document.getElementById('chat');
+		var chatForm = document.getElementById('chat-form');
+		var teamDesp = document.getElementById('teamDesp');
+
+		socket.on('updateGamePlay', function(data){
+			loopnumber = 0;
+			teamDesp.innerHTML += '<li style="color:#28a745">Team Name: ' + data.team + '</li><br>';
+			teamDesp.innerHTML += '<li>Mr X: ' + data.mrX + '</li><br>';
+			teamDesp.innerHTML += '<li style="color:#dc3545">Detective 1: ' + data.det1 + '</li><br>';
+			teamDesp.innerHTML += '<li style="color:#00bcd4">Detective 2: ' + data.det2 + '</li><br>';
+			teamDesp.innerHTML += '<li style="color:#ffc107">Detective 3: ' + data.det3 + '</li><br>';
+			teamDesp.innerHTML += '<li style="color:#673AB7">Statergies Planned: ' + data.staplay + '</li><br>';
+			teamDesp.innerHTML += '<li style="color:#795548">Detectives Win: ' + data.dwin + '</li><br>';
+			teamDesp.innerHTML += '<li style="color:#607D8B">Mr X Wins: ' + data.xwin + '</li><br>';
+
+			document.getElementById('ptx').style.display = 'block';
+			document.getElementById('pt1').style.display = 'block';
+			document.getElementById('pt2').style.display = 'block';
+			document.getElementById('pt3').style.display = 'block';
+		});
+
+		socket.on('addToChat', function(data){
+			if(data.turn == 1)
+			{
+				chatText.innerHTML += '<li><u>' + data.user + '</u>: <br>' + data.send + '</li><br>';
+			}
+			else if(data.turn == 2)
+			{
+				chatText.innerHTML += '<li style="color:red"><u>' + data.user + '</u>: <br>' + data.send + '</li><br>';
+			}
+			else if(data.turn == 3)
+			{
+				chatText.innerHTML += '<li style="color:#00bcd4"><u>' + data.user + '</u>: <br>' + data.send + '</li><br>';
+			}
+			else if(data.turn == 4)
+			{
+				chatText.innerHTML += '<li style="color:brown"><u>' + data.user + '</u>: <br>' + data.send + '</li><br>';
+			}
+			
+		});
+
+		chatForm.onsubmit = function(e)
+		{
+			e.preventDefault(); 
+			
+			socket.emit('sendMsgToServer',chatInput.value);
+			chatInput.value = ''; //clear the value after emitting
+		}
+
+		document.addEventListener('keydown', myKeyDown);
+		document.addEventListener('keyup', myKeyUp);
+
+		function myKeyDown()
+		{
+			if(event.keyCode === 68) //d
+			{
+				socket.emit('keyPress',{
+					inputId:'right',
+					state:true
+				});
+			}
+			if(event.keyCode == 83) //s
+			{
+				socket.emit('keyPress',{
+					inputId:'down',
+					state:true
+				});
+			}
+			else if(event.keyCode == 65) //a
+			{
+				socket.emit('keyPress',{
+					inputId:'left',
+					state:true
+				});
+			}
+			else if(event.keyCode == 87) //w
+			{
+					socket.emit('keyPress',{
+					inputId:'up',
+					state:true
+				});
+			}
+		}
+
+		function myKeyUp()
+		{
+			if(event.keyCode == 68) //d
+			{
+				socket.emit('keyPress',{
+					inputId:'right',
+					state:false
+				});
+			}
+			else if(event.keyCode == 83) //s
+			{
+				socket.emit('keyPress',{
+					inputId:'down',
+					state:false
+				});
+			}
+			else if(event.keyCode == 65) //a
+			{
+				socket.emit('keyPress',{
+					inputId:'left',
+					state:false
+				});
+			}
+			else if(event.keyCode == 87) //w
+			{
+				socket.emit('keyPress',{
+					inputId:'up',
+					state:false
+				});
+			}
+		}
+
+		
+		socket.on('modalToggle', function(data){
+			var toggleButton = document.getElementById('playBtnTurn');
+			if(data.toggle)
+			{
+				toggleButton.setAttribute('data-toggle','modal');
+			}
+			else
+			{
+				toggleButton.setAttribute('data-toggle','mod');
+			}
+		});
+
+		socket.on('closeModal', function(){
+			$('#scotlandYardPlay').modal('hide');
+		});
+
+		socket.on('addTrack', function(data){
+			socket.emit('updateTrack',{
+				mode:data.mode,
+				to:data.to,
+				who:data.who
+			});
+		});
+
+		socket.on('showTrack', function(data){
+			var show = document.getElementById(data.id);
+			show.innerHTML = ''; 
+			for(var i=0; i<data.tracked.length; i++)
+			{
+				if( i==4 || i==10 || i==16 || i==22 || i==28)
+				{
+					show.innerHTML += data.tracked[i]+'>><br>';
+				}
+				else
+				{
+					show.innerHTML += data.tracked[i]+'>>';
+				}
+			}
+		});
+
+		socket.on('revealxTrack', function(data){
+			var show = document.getElementById(data.id);
+			show.innerHTML = ''; 
+			for(var i=0; i<data.tracked.length; i++)
+			{
+				if( i==4 || i==10 || i==16 || i==22 || i==28)
+				{
+					show.innerHTML += data.tracked[i]+'>><br>';
+				}
+				else
+				{
+					show.innerHTML += data.tracked[i]+'>>';
+				}
+			}
+		});
+
+		socket.on('hidexTrack', function(data){
+			var show = document.getElementById(data.id);
+			show.innerHTML += data.mode+">>";
+		});
+
+		socket.on('countTicket',function(data){
+			
+			numTaxi.innerHTML = data.taxiN,
+			numBus.innerHTML = data.busN,
+			numUg.innerHTML = data.ugN,
+			numBlack.innerHTML = data.blackN
+
+		});
+
+		socket.on('ticketToX',function(data){
+			
+			socket.emit('giveToX',{
+				what:data.ticket
+			});
+
+		});
+
+		socket.on('callNext',function()
+		{
+			
+			socket.emit('passNextPlayer');
+			
+		});
+
+		var xWin = document.getElementById('xWin');
+		var dWin = document.getElementById('dWin');
+
+		socket.on('openGameOverModal',function(data){
+			if(data.xwon)
+			{
+				xWin.style.display = "block";
+			}
+			else
+			{
+				dWin.style.display = "block";
+			}
+			document.getElementById('goTN').innerHTML += data.teamname;
+			document.getElementById('goX').innerHTML += data.mrx;
+			document.getElementById('goD1').innerHTML += data.detec1;
+			document.getElementById('goD2').innerHTML += data.detec2;  
+			document.getElementById('goD3').innerHTML += data.detec3;
+			document.getElementById('goSP').innerHTML += data.staplay;
+			document.getElementById('goDW').innerHTML += data.dd;
+			document.getElementById('goXW').innerHTML += data.xx;
+	       		
+			$('#gameOverSLYG').modal('show');
+		});
+
+		socket.on('GameOver',function(data){
+			socket.emit('GOver',{
+				xwon:data.xwon,
+				teamname:data.teamname,
+				mrx:data.mrx,
+				detec1:data.detec1,
+				detec2:data.detec2,
+				detec3:data.detec3,
+				staplay:data.staplay,
+				dd:data.dd,
+				xx:data.xx
+			});
+		});
+
+		socket.on('taxiTicketsOver',function(){
+			document.getElementById('taxiOver').style.display = "block";
+		});
+
+		socket.on('playerLeft',function(data){		
+			$('#scotlandYardPlay').modal('hide');  
+			$('#gameOverSLYG').modal('hide');   			       		
+			$('#gameDisconnect').modal('show');
+		});
+
+		socket.on('movement',function(data){	
+			var show = document.getElementById(data.id);
+			show.innerHTML = 'Moves: '+data.moves;
+		});
+		
+		</script>
+</body>
+</html>
